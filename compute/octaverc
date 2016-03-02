@@ -1,0 +1,20 @@
+## System-wide startup file for Octave.
+##
+## This file should contain any commands that should be executed each
+## time Octave starts for every user at this site.
+warning('off', 'Octave:shadowed-function');
+crash_dumps_octave_core(0);
+addpath(sprintf("/srv/cloudlabs/compute/scripts"));
+addpath(sprintf("/srv/cloudlabs/compute/scripts/jsonlab"));
+# TODO:don't do graphics_toolkit fltk if something else is there
+[status, output] = system(sprintf('ps -C octave | cut -c 1-5 | awk ''$1!=%d {print $1}''', getpid));
+if sum(output=="\n") > 1
+  disp('Another octave process is running.  Using gnu_plot graphics toolkit.');
+  disp('Please use ''graphics_toolkit fltk'' to enable browser plotting');
+  disp('Only one octave process should use this toolkit, so use the command');
+  disp('''graphics_toolkit gnuplot'' in your other octave processes.');
+else
+  graphics_toolkit fltk;
+end
+# addpath(sprintf("/srv/cloudlabs/compute/scripts/custom_plots"));
+# addpath(sprintf("/srv/cloudlabs/compute/scripts/graphics_objects"));

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/smoothness/jquery-ui.min.css" rel="stylesheet" type="text/css" />
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+<meta charset=utf-8 />
+<link href="style.css" rel="stylesheet" type="text/css" />
+<script src='layout_mgr.js'></script>
+<script>
+var hh = '40px';
+var fesg = {
+  divs : {  
+    'files'   : { t: hh,  b: '0%',  l: '0%',  r: '85%'},
+    'split_x_0' : { t: hh, b: '0%', l: '15%', r: 'auto' },
+    'editors' : { t: hh,  b: '0%',  l: '15%', r: '50%'},
+    'split_x_1' : { t: hh, b: '0%', l: '50%', r: 'auto' },
+    'shells'  :   { t: hh,    b: '65%',  l: '50%', r: '0%'},
+    'split_y_0' : { t: '35%', b: 'auto', l: '50%', r: '0%' },
+    'graphs'  :   { t: '35%', b: '0%',   l: '50%', r: '0%'} 
+  },
+  // contraints that must hold between
+  splits : {
+    'split_x_0' : {axis:'x', left: ['files'],  right:['editors']},
+    'split_x_1' : {axis:'x', left: ['editors'], right:['shells','graphs','split_y_0']},
+    'split_y_0' : {axis:'y', top: ['shells'], bottom:['graphs']}
+  }
+};
+
+var fsg = {
+  divs : {
+    'files'  :   { t: hh, b: '0%', l:'0%',  r: '85%'},
+    'split_x_0': { t: hh, b: '0%', l:'15%', r:'auto'},
+    'shells' :   { t: hh, b: '0%', l:'15%', r: '20%'},
+    'split_x_1': { t: hh, b: '0%', l:'50%', r:'auto'},
+    'graphs' :   { t: hh, b: '0%', l:'50%', r: '0%'},
+
+    'editors': { t: "100%",  b: '0%',  l: '50%', r: '50%', opacity:0, hide:true}
+  },
+  splits : {
+    'split_x_0': { axis:'x', left: ['files'], right: ['shells']},
+    'split_x_1': { axis:'x', left: ['shells'], right: ['graphs']}
+  }
+};
+
+var fes = {
+  divs : {  
+    'files'   : { t: hh,  b: '0%',  l: '0%',  r: '85%'},
+    'split_x_0' : { t: hh, b: '0%', l: '15%', r: 'auto' },
+    'editors' : { t: hh,  b: '0%',  l: '15%', r: '50%'},
+    'split_x_1' : { t: hh, b: '0%', l: '50%', r: 'auto' },
+    'shells'  :   { t: hh,    b: '0%',  l: '50%', r: '0%'},
+    'graphs'  :   { t: '35%', b: '0%',   l: '50%', r: '0%', opacity:0, hide:true} 
+  },
+  // contraints that must hold between
+  splits : {
+    'split_x_0' : {axis:'x', left: ['files'],  right:['editors']},
+    'split_x_1' : {axis:'x', left: ['editors'], right:['shells']}
+  }
+};
+
+var fs = {
+  divs : {  
+    'files'   : { t: hh,   b: '0%',  l: '0%',  r: '85%'},
+    'split_x_0' : { t: hh, b: '0%',  l: '15%', r: 'auto' },
+    'shells'  :   { t: hh, b: '0%',  l: '50%', r: '0%'},
+    
+    'editors' : { t: hh,  b: '0%',  l: '15%', r: '50%', opacity: 0, hide:true},
+    'graphs'  :   { t: '35%', b: '0%',   l: '50%', r: '0%', opacity:0, hide:true} 
+  },
+  // contraints that must hold between
+  splits : {
+    'split_x_0' : {axis:'x', left: ['files'],  right:['shells']}
+  }
+};
+
+
+var fes2 = {
+  divs : {  
+    'files'   :   { t: hh,  b: '50%',  l: '0%',  r: '85%'},
+    'split_x_0' : { t: hh, b: '50%', l: '15%', r: 'auto' },
+    'editors' :   { t: hh,  b: '20%',  l: '15%', r: '0%'},
+    'split_y_0' : { t: '50%', b: 'auto', l: '0%', r: '0%' },
+    'shells'  :   { t: '50%', b: '0%', l: '0%', r: '0%'},
+    'graphs'  :   { t: '35%', b: '0%',   l: '50%', r: '0%', opacity:0, hide:true} 
+  },
+  // contraints that must hold between
+  splits : {
+    'split_x_0' : {axis:'x', left: ['files'],  right:['editors']},
+    'split_y_0' : {axis:'y', top: ['files','editors','split_x_0'], bottom:['shells']}
+  }
+};
+
+var fes3 = {
+  divs : {  
+    'files'   :   { t: hh,  b: '0%',  l: '0%',  r: '85%'},
+    'split_x_0' : { t: hh, b: '0%', l: '15%', r: 'auto' },
+    'editors' :   { t: hh,  b: '20%',  l: '15%', r: '0%'},
+    'split_y_0' : { t: '50%', b: 'auto', l: '15%', r: '0%' },
+    'shells'  :   { t: '50%', b: '0%', l: '15%', r: '0%'},
+    'graphs'  :   { t: '35%', b: '0%',   l: '50%', r: '0%', opacity:0, hide:true} 
+  },
+  // contraints that must hold between
+  splits : {
+    'split_x_0' : {axis:'x', left: ['files'],  right:['editors', 'shells', 'split_y_0']},
+    'split_y_0' : {axis:'y', top: ['editors'], bottom:['shells']}
+  }
+};
+
+var fesg2 = {
+  divs : {  
+    'files'   : { t: hh,  b: '35%',  l: '0%',  r: '85%'},
+    'split_x_0' : { t: hh, b: '35%', l: '15%', r: 'auto' },
+    'editors' : { t: hh,  b: '35%',  l: '15%', r: '50%'},
+    'split_x_1' : { t: hh, b: '35%', l: '50%', r: 'auto' },
+    'graphs'  :   { t: hh,    b: '65%',  l: '50%', r: '0%'},
+    'split_y_0' : { t: '65%', b: 'auto', l: '0%', r: '0%' },
+    'shells'  :   { t: '65%', b: '0%',   l: '0%', r: '0%'} 
+  },
+  // contraints that must hold between
+  splits : {
+    'split_x_0' : {axis:'x', left: ['files'],  right:['editors']},
+    'split_x_1' : {axis:'x', left: ['editors'], right:['graphs']},
+    'split_y_0' : {axis:'y', top: ['files','editors','graphs','split_x_0','split_x_1'], bottom:['shells']}
+  }
+};
+var fesg3 = {
+  divs : {  
+    'editors' :   { t: hh,    b: '35%',  l: '0%', r: '50%'},
+    'graphs'  :   { t: hh,    b: '35%',  l: '50%', r: '0%'},
+    'files'   :   { t: '65%',  b: '0%',   l: '0%', r: '85%'},
+    'shells'  :   { t: '65%',  b: '0%',   l: '15%', r: '0%'},
+
+    'split_eg'    : { t: hh, b: '35%', l: '50%', r: 'auto' },
+    'split_fs'    : { t: '65%', b: '0%', l: '15%', r: 'auto' },
+    'split_eg_fs' : { t: '65%', b: 'auto', l: '0%', r: '0%' },
+  },
+  // contraints that must hold between
+  splits : {
+    'split_eg'    : {axis:'x', left: ['editors'],  right:['graphs']},
+    'split_fs'    : {axis:'x', left: ['files'], right:['shells']},
+    'split_eg_fs' : {axis:'y', top: ['editors','split_eg', 'graphs'], bottom:['files','split_fs','shells']}
+  }
+};
+
+
+$(function() {
+  LayoutMGR.Render(fs);
+  $('#fs').click( function() {  LayoutMGR.Render(fs); });
+  $('#fsg').click( function() {  LayoutMGR.Render(fsg); });
+  $('#fesg').click( function() { LayoutMGR.Render(fesg); });
+  $('#fesg2').click( function() { LayoutMGR.Render(fesg2); });
+  $('#fes').click( function() { LayoutMGR.Render(fes); });
+  $('#fes2').click( function() { LayoutMGR.Render(fes2); });
+  $('#fes3').click( function() { LayoutMGR.Render(fes3); });
+  $('#fesg3').click( function() { LayoutMGR.Render(fesg3); });
+});
+</script>
+<title>JS Bin</title>
+</head>
+<body>  
+  <div id='header'`>
+    <button id='fs'>FS</button>
+    <button id='fsg'>FSG</button>
+    <button id='fes3'>FeS3</button>
+    <button id='fes2'>FeS2</button>
+    <button id='fes'>FES</button>
+    <button id='fesg3'>FeSG3</button>
+    <button id='fesg2'>FeSG2</button>
+    <button id='fesg'>FESG</button>
+  </div>
+  
+  <div id='files'>Files</div>
+  <div id='editors'>
+    <iframe src='ace.html' width='100%' height='100%'></iframe>
+  </div>
+  <div id='shells'>Shells</div>
+  <div id='graphs'>
+    <iframe id='test' src="http://ai.stanford.edu/~varung/" width="100%" height="100%"></iframe>
+  </div>
+  <script>
+    $('#shells').resize(function(){
+      console.log(arguments);
+    });
+  </script>
+</body>
+
+</html>
+

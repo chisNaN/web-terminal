@@ -1,0 +1,43 @@
+#chat_container.manager_pane
+  .chat-spacer
+  .chat-nav.button-navbar
+    ul.nav.navbar
+      li.with-separator.load-older
+        a
+          i.fa.fa-fw.fa-history
+          | Load older chats
+      li.with-separator.purge
+        a
+          i.fa.fa-fw.fa-trash-o
+          | Purge chat history
+      li.with-separator.rtc
+        a
+          i.fa.fa-fw.fa-video-camera
+          | Start a video call
+  #message-alert New Messages
+  ul#conversation
+  //- Reference of li's dynamically added by JS
+    li.day-marker
+      time
+    li.message.pending.stale
+      div
+        span.callsign
+          span.name
+          span.timestamp
+            time
+        span.stale
+          button.resend
+          button.cancel
+        span.pending
+          i.fa.fa-fw.fa-cog.fa-spin
+      .content
+        p
+        br
+        p
+  form.chat-input
+    textarea.form-control(name='message')
+    button.btn.btn-default(type='submit') Send
+  form.chat-name(style="display:none")
+    div.name-input-description Please set a username
+    textarea.form-control(name='name')
+    button.btn.btn-default(type='submit') Set Name

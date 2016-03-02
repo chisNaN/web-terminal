@@ -1,0 +1,57 @@
+#html_container
+
+  .html_button
+    position: absolute
+    padding: 8px
+    height: 32px
+    width: 29px
+    cursor: pointer
+    z-index: 1
+    .theme_light &
+      color: $text-light
+      background: $background-light
+      border: 1px solid rgb(222, 222, 222)
+      border-top: none
+      border-left: none
+      &:hover, &:focus
+        background: $background-active-light
+    .theme_dark &
+      color: $base1
+      background: $background-dark
+      border: 1px solid $base01
+      border-top: none
+      border-left: none
+      &:hover, &:focus
+        background: $base0
+        color: $base03
+
+  #html_form_container
+    position: relative
+    padding-left: 58px
+
+  #html_url_input
+    width: 100%
+    height: 32px
+    padding-left: 7px
+    outline: none
+    border: none
+    .theme_light &
+      border-bottom: 1px solid #dddddd
+    .theme_dark &
+      border-bottom: 1px solid $base01
+      background: $base02
+      color: $base0
+
+  .html_frame
+    box-shadow: none
+    border: none
+    outline: none
+    width: 100%
+    height: 100%
+
+  #html_content_div
+    top: 56px
+    .theme_light &
+      background: white
+    .theme_dark &
+      background: $base03

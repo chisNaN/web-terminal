@@ -1,0 +1,189 @@
+#!/bin/bash
+forever='./node_modules/forever/bin/forever'
+
+if [ "$EUID" -ne 0 ]
+  then echo "Please run as root or sudo"
+  exit
+fi
+
+cd /opt/web-terminal/
+
+if [ ! -f agreement ]; then
+  curl https://s3.amazonaws.com/cloudlabs/eula.txt
+  echo -ne "Do you agree to these terms? (y|n)"
+  read confirm
+  until [[ $confirm =~ ^[yYnN]$ ]]
+    do
+      echo -ne "Do you agree to these terms? (y|n)"
+      read confirm
+    done
+  if [ ${confirm} = 'n' ] || [ ${confirm} = 'N' ]; then
+    exit 1
+  else
+    echo 1 >> agreement
+  fi
+fi
+
+if [ -z "$1" ] || [ "$1" = 'help' ] || [ "$1" = "--help" ]; then
+    echo -e "Usage: web-terminal COMMAND"
+    echo -e ""
+    echo -e "List of Commands:"
+    echo -e "start             Starts web-terminal server"
+    echo -e "stop              Stops web-terminal server and clears state (open tabs, open files, etc)"
+    echo -e "restart           Restarts web-terminal server without clearing state\n"
+    echo -e "set-port          Set port to listen on\n"
+    echo -e "enable-auth       Enable authentication"
+    echo -e "disable-auth      Disable authentication"
+    echo -e "configure-auth    Set username and password for authentication\n"
+    echo -e "enable-ssl        Enable SSL"
+    echo -e "disable-ssl       Disable SSL"
+    echo -e "configure-ssl     Set certificate details for SSL"
+    exit 1
+fi
+
+
+if [ $1 = "start" ]; then
+  pkill -f pxy >> /dev/null
+  pkill -f pty >> /dev/null
+  ${forever} stop compute/server.js >> /dev/null
+  NODE_ENV='production' ${forever} start --killSignal=SIGHUP compute/server.js
+  mkdir -p /var/log/cloudlabs
+  mkdir -p /tmp/pxy/nginx/
+  mkdir -p /tmp/pxy/nginx/proxy_temp
+  ./sbin/p/bin
+  ./CL/ptyserved
+fi
+
+if [ $1 = 'stop' ]; then
+  echo -n 'Stopping the server completely will close the current state of your terminal. Continue? [y|n] '
+  read confirm
+  if [ ${confirm} = 'y' ]; then
+    pkill -f pxy
+    pkill -f pty
+    ${forever} stop compute/server.js
+  fi
+fi
+
+if [ $1 = 'soft-stop' ]; then
+  pkill -f pxy
+  ${forever} stop compute/server.js
+fi
+
+if [ $1 = 'restart' ]; then
+  pty=$(pgrep ptyserved)
+  if [ -z $pty ]; then
+    ./CL/ptyserved
+  fi
+  node=$(pgrep -f /opt/web-terminal/compute/server)
+  if [ -z $node ]; then
+    NODE_ENV='production' ${forever} start --killSignal=SIGHUP compute/server.js
+  fi
+  pkill -f pxy
+  ./sbin/p/bin
+  NODE_ENV='production' ${forever} restart --killSignal=SIGHUP compute/server.js
+fi
+
+if [ $1 = 'set-port' ]; then
+  oldport=$(cat pxy.conf | grep "listen" | cut -f 8 -d ' ')
+  if [ ! -f /opt/web-terminal/pxy.key ]; then
+    oldport=${oldport%?}
+  fi
+  echo -n "What would you like the port to be? [${oldport}]"
+  read newport
+  until [[ $newport =~ ^[0-9]*$ ]]
+    do
+      echo -ne "That's not a valid input"
+      echo -ne "What would you like the port to be? [${oldport}]"
+      read newport
+    done
+  if [ -n "${newport}" ]; then
+    sed -i "s/listen ${oldport}/listen ${newport}/" /opt/web-terminal/pxy.conf
+    echo "Port set to  ${newport}."
+  else 
+    echo "Port set to  ${newport}"
+  fi
+  echo "Restart your web-terminal with 'web-terminal restart' for changes to take effect"
+fi
+
+if [ $1 = 'configure-auth' ]; then
+  rm -rf /opt/web-terminal/.htpasswd
+  echo -n "Provide a username: [termuser]"
+  read username
+  if [ -z "${username}" ]; then
+    username="termuser"
+  fi
+  htpasswd -c ./.htpasswd ${username}
+  echo 'Auth configured. Enable authentication with "web-terminal enable-auth"'
+fi
+
+if [ $1 = 'enable-auth' ]; then
+  if [ ! -f .htpasswd ]; then
+    echo 'You need to set a username and password with "web-terminal configure-auth" first'
+  else
+    sed -i 's@compute;@compute;\n        auth_basic "Restricted";\n        auth_basic_user_file /opt/web-terminal/.htpasswd;@' /opt/web-terminal/pxy.conf
+    echo 'Auth enabled!'
+    echo "Restart your web-terminal with 'web-terminal restart' for changes to take effect"
+  fi
+fi
+
+if [ $1 = 'disable-auth' ]; then
+  sed -i '/auth_basic/d' /opt/web-terminal/pxy.conf
+  echo 'Auth disabled!'
+  echo "Restart your web-terminal with 'web-terminal restart' for changes to take effect"
+fi
+
+if [ $1 = 'configure-ssl' ]; then
+  # remove old certificate
+  rm -f /opt/web-terminal/pxy.key
+  rm -f /opt/web-terminal/pxy.crt
+
+  echo "Please provide information needed for your certificate. Make sure the common name matches the url at which you will access web-terminal. Otherwise, the certificate will not be trusted."
+  openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /opt/web-terminal/pxy.key -out /opt/web-terminal/pxy.crt
+  echo "SSL configured. Enable authentication with 'web-terminal enable-ssl'"
+fi
+
+if [ $1 = 'enable-ssl' ]; then
+  if [ ! -f .pxy.key ]; then
+    echo 'You need to configure a certificate with "web-terminal configure-ssl" first'
+  else
+    sed -i "s@listen \([0-9]*\);@listen \1 ssl;\n      ssl off;\n      ssl_certificate /opt/web-terminal/pxy.crt;\n      ssl_certificate_key /opt/web-terminal/pxy.key;@" /opt/web-terminal/pxy.conf
+    echo 'SSL enabled!'
+    echo "Restart your web-terminal with 'web-terminal restart' for changes to take effect"
+  fi
+fi
+
+if [ $1 = 'disable-ssl' ]; then
+  sed -i "s@listen \([0-9]*\) ssl;@listen \1;@" /opt/web-terminal/pxy.conf
+  sed -i "/ssl off/d" /opt/web-terminal/pxy.conf
+  sed -i "/ssl_certificate/d" /opt/web-terminal/pxy.conf
+  echo 'SSL disabled!'
+  echo "Restart your web-terminal with 'web-terminal restart' for changes to take effect"
+fi
+
+# script shortcuts
+
+if [ $1 = 'edit' ]; then
+  shift
+  ./scripts/edit.sh "$@"
+fi
+
+if [ $1 = 'browse' ]; then
+  ./scripts/browse.sh "$2"
+fi
+
+if [ $1 = 'display' ]; then
+  shift
+  ./scripts/display.sh "$@"
+fi
+
+if [ $1 = 'cd' ]; then
+  ./scripts/cd.sh "$2"
+fi
+
+if [ $1 = 'reload' ]; then
+  ./scripts/reload_browser.sh
+fi
+
+if [ $1 = '--version' ]; then
+  cat version
+fi

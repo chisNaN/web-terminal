@@ -1,0 +1,83 @@
+#top_bar.navbar.navbar-default.navbar-static-top(style='display: none;')
+  .container(style='width: 100%;')
+    .navbar-header
+    ul#top_bar_left_list.nav.navbar-nav
+      li#terminals_dropdown.dropdown(style='display: none;')
+        a#nav_link_main.dropdown-toggle(data-toggle='dropdown')
+          img#nav_logo(height='24', width='32')
+          = ' '
+          span#nav_terminal_name
+          b.caret
+        ul.dropdown-menu.dropdown-popover
+          span.fa.fa-spin.fa-cog.dropdown-loading-icon
+          iframe.dropdown-iframe(height='0' width='280' scrolling='no')
+    ul#top_bar_views_list.nav.navbar-nav
+      // control buttons for panels inserted here
+    ul#top_bar_right_list.nav.navbar-nav.pull-right
+      li(style='display: none;')
+        a#nav_link_signup(title='signup') Sign Up
+      li(style='display: none;')
+        a#nav_link_login(title='login') Log in
+      li#update_link(style='display: none;')
+        a#update_tooltip(href='#', style='color: green;')
+          span.fa.fa-bolt
+          |  Update
+      if showPopovers
+        li#resize_dropdown.dropdown(style='display: none;')
+          a#nav_link_resize.dropdown-toggle(data-toggle='dropdown')
+            span.fa.fa-database
+             = ' '
+             span.hidden-xs-inline
+               |  CPU & Disk
+          ul.dropdown-menu.dropdown-popover
+            span.fa.fa-spin.fa-cog.dropdown-loading-icon
+            iframe.dropdown-iframe(height='278' width='280' scrolling='no')
+        li#sharing_dropdown.dropdown(style='display: none;')
+          a#nav_link_sharing.dropdown-toggle(data-toggle='dropdown')
+            span.fa.fa-users
+            = ' '
+            span.hidden-xs-inline
+              |  Share Access
+          ul.dropdown-menu.dropdown-popover
+            span.fa.fa-spin.fa-cog.dropdown-loading-icon
+            iframe.dropdown-iframe(height='0' width='280' scrolling='no')
+        li#snapshot_dropdown.dropdown(style='display: none;')
+          a#nav_link_snapshot.dropdown-toggle(data-toggle='dropdown')
+            span.fa.fa-external-link-square
+            |  Snapshot
+          ul.dropdown-menu.dropdown-popover
+            span.fa.fa-spin.fa-cog.dropdown-loading-icon
+            iframe.dropdown-iframe(height='0' width='220' scrolling='no')
+      li#misc_dropdown.dropdown
+        a.dropdown-toggle(data-toggle='dropdown')
+          span.fa.fa-fw.fa-gear
+          span#connection_status.waiting_connection
+            span.fa.fa-fw.fa-times-circle
+            span.fa.fa-fw.fa-question-circle
+            span.fa.fa-fw.fa-dot-circle-o
+            span.fa.fa-fw.fa-check-circle
+            span.fa.fa-fw.fa-exclamation-circle
+        ul.dropdown-menu
+          li
+            a#meta_stats(style='color: #aaa;')
+              .cpu_stat
+              .ram_stat
+              .ping_stat
+          li.divider
+          li
+            a#toggle_metatheme Toggle Light/Dark
+          li
+            a#toggle_layout Toggle Layout
+          li
+            a#edit_hotkeys Edit Hotkeys
+          li.divider
+          if showTerminalHelp
+            li
+              a#nav_link_faq(target='_blank') Terminal Help
+          li
+            a(target='_blank', href='https://github.com/ajaxorg/ace/wiki/Default-Keyboard-Shortcuts') Editor Help
+          li.divider
+          li#feedback-li
+            a#feedback-link Send Feedback
+          li(style='display: none;')
+            a#nav_link_logout(title='logout') Logout

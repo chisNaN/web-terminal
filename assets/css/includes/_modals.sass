@@ -1,0 +1,37 @@
+.modal-content
+  overflow: hidden
+  border: none
+  .theme_dark &
+    background: none
+
+.modal-header
+  .theme_dark &
+    background-color: $base02 
+    border-bottom: 1px solid #444444 !important
+    color: #888888
+
+.modal-body
+  .theme_dark &
+    color: $base1
+    background-color: $base02
+
+#text_shown
+  width: 100%
+  border: 1px
+  padding: 10px
+  margin: 10px
+  .theme_light &
+    background-color: #eeeeee
+  .theme_dark &
+    background-color: #111111
+
+#confirm_modal
+  .modal-dialog
+    width: 400px
+    p
+      margin: 5px 0 15px
+
+.loading_modal
+  position: 'absolute'
+  width: '100%'
+  text-align: 'center'

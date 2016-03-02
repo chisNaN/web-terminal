@@ -1,0 +1,103 @@
+#shell_container
+  position: absolute
+  height: auto
+  width: auto
+  left: 50%
+  right: 0%
+  top: 0%
+  bottom: 50%
+
+  .content_div
+    .theme_light &
+      background-color: #f8f8f8
+    .theme_dark &
+      background-color: #080808
+
+  .info_pane
+    width: 9em
+    span.compatibility-mode
+      display: none
+      padding: 0 3px
+    .lock-button
+      padding: 5px 3px 4px 3px
+      color: white
+      background-color: #2c879b
+      cursor: pointer
+      &:hover
+        background-color: lighten(#2c879b, 5)
+      &:not(.many)
+        visibility: hidden
+      &.lock
+        .theme_light &:not(.leader)
+          background-color: #ececec
+          &:hover
+            background-color: lighten(#ececec, 5)
+        .theme_dark &:not(.leader)
+          background-color: #333
+          &:hover
+            background-color: lighten(#333, 5)
+        .unlock
+          display: none
+      &:not(.lock) .lock
+        display: none
+    .users-indicator
+      padding: 0 3px
+      &.many .one
+        display: none
+      &:not(.many) .many
+        display: none
+    .dimensions
+      font-family: monospace
+      display: inline-block
+      position: absolute
+      right: 0
+      text-align: center
+      width: 5em
+
+  #resizable, .terminal
+    .theme_light &
+      background-color: white !important
+      color: black !important
+    .theme_dark &
+      background-color: $base03 !important
+      color: $base1 !important
+    .loading
+      position: absolute
+      top: 50%
+      left: 50%
+      width: 200px
+      height: 70px
+      margin: -35px -100px
+      text-align: center
+      // Match color of loading page
+      color: #999
+
+  .terminal
+    position: absolute
+    left: 0
+    top: 0
+    border: 0
+    font-family: 'Monaco', monospace
+    font-size: 12px !important
+    line-height: normal
+    cursor: text
+
+    > div
+      margin-top: -1px
+      white-space: pre
+
+    .terminal-cursor
+      color: #f0f0f0
+      background: #555
+
+  .led
+    font-size: 14px
+    width: 16px
+    height: 16px
+    padding: 1px 0px
+    padding-right: 8px
+    margin: 0
+    vertical-align: middle
+    position: relative
+    top: -1px
+    *overflow: hidden

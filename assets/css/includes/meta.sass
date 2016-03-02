@@ -1,0 +1,182 @@
+#top_bar
+  border-width: 0px
+  min-height: 10px
+  font-weight: 600
+  margin: -$panel-margin
+  .theme_dark &
+    border-bottom: 1px solid rgb(100, 100, 100)
+    background: #414141
+    background-repeat: repeat-x
+
+  a, a:hover
+    cursor: default
+    -webkit-user-select: none
+    -moz-user-select: none
+    -ms-user-select: none
+
+  > .container
+    border-top: 4px solid rgba(160,160,160,0.15)
+    padding-left: 0
+    padding-right: 0
+    ul.navbar-nav
+      margin-top: -4px
+
+  // terminal logo button styles
+  ul#top_bar_left_list.navbar-nav > li
+    .theme_light &
+      border-top: 4px solid $accent-color
+    .theme_dark &
+      border-top: 4px solid $accent-color
+    a#nav_link_main
+      padding: 7px 12px 7px 16px
+      background-color: initial
+      .theme_light &
+        color: #222
+        border-right: 1px solid #ececec
+        &:hover, &:focus
+          background: #fff
+      .theme_dark &
+        color: #999
+        border-right: 1px solid $base01
+        &:hover, &:focus
+          background: #222
+      #nav_terminal_name
+        position: relative
+        top: 1px
+
+  // cristina's toggle button styles
+  ul#top_bar_views_list.navbar-nav > li.panel_dock
+    > a
+      background: none
+      box-shadow: none
+      border: none
+      border-radius: 0
+      padding: 9px 11px 9px 15px
+      text-transform: uppercase
+      font-size: 12px
+      letter-spacing: 0.1em
+      span
+        line-height: 20px
+      .fa-expand, .fa-compress
+        margin-left: 8px
+        line-height: 20px
+        font-size: 14px
+        padding-left: 8px
+      .theme_light &
+        color: #adadad
+        border-right: 1px solid #ececec
+      .theme_dark &
+        color: $border-gray
+        border-right: 1px solid $border-gray
+        &:hover, &:focus, &:active
+          color: $base2
+      .fa-expand
+        .theme_light &
+          border-left: 1px solid #adadad
+          &:hover, &:focus
+            color: initial
+        .theme_dark &
+          color: $border-gray
+          border-left: 1px solid $border-gray
+          &:hover, &:focus
+            color: $base3
+
+
+    .theme_light &.active > a
+      color: #222
+      &:hover, &:focus
+        background: #fff
+    .theme_dark &.active > a
+      color: $base1
+      &:hover, &:focus
+        color: $base3
+    .theme_light &.suppressed > a
+      color: rgba(0,0,0,0.2)
+    .theme_dark &.suppressed > a
+      color: rgba(255,255,255,0.2)
+
+    .theme_light &
+      border-top: 4px solid #ddd
+      &.active
+        border-top: 4px solid $accent-color
+      &.suppressed.active
+        border-top: 4px solid lighten($accent-color, 40%)
+    .theme_dark &
+      border-top: 4px solid #808080
+      &.active
+        border-top: 4px solid $accent-color
+      &.suppressed.active
+        border-top: 4px solid darken($accent-color, 10%)
+
+  // chiclet menu styles
+  ul#top_bar_right_list.navbar-nav
+    > li > a
+      padding: 9px
+      padding-top: 12px
+      border: 1px solid transparent
+      font-size: 85%
+      font-weight: 400
+      color: $base2
+      > .fa
+        margin-right: 2px
+      .theme_light &:hover
+        color: #222
+      .theme_dark &:hover
+        color: #aaa
+    > li#misc_dropdown > a
+      .theme_light &
+        border-left: 1px solid #ececec
+      .theme_dark &
+        border-left: 1px solid $border-gray
+      > .fa
+        display: block
+        font-size: 16px
+        padding-top: 2px
+        margin-right: -2px
+      #connection_status
+        position: absolute
+        right: 3px
+        top: 6px
+        color: #fff
+        font-size: 11px
+        .fa
+          display: none
+        .theme_light &.waiting_connection .fa.fa-dot-circle-o
+          display: block
+          color: #777
+        .theme_dark &.waiting_connection .fa.fa-dot-circle-o
+          display: block
+          color: #999
+        .theme_light &.good_connection .fa.fa-check-circle
+          display: block
+          color: green
+        .theme_dark &.good_connection .fa.fa-check-circle
+          display: block
+          color: #00B600
+        .theme_light &.slow_connection .fa.fa-question-circle
+          display: block
+          color: #FFA300
+        .theme_dark &.slow_connection .fa.fa-question-circle
+          display: block
+          color: #FFA300
+        .theme_light &.no_connection .fa.fa-times-circle
+          display: block
+          color: #AD0000
+        .theme_dark &.no_connection .fa.fa-times-circle
+          display: block
+          color: #FF5656
+    > li.open > a
+      box-shadow: 1px 1px 3px rgba(0,0,0,0.1)
+      .theme_light &
+        color: #555555
+        background-color: #fff
+        border: 1px solid #ccc
+        border-left: 1px solid #ccc !important
+      .theme_dark &
+        color: $base1
+        background-color: $base02
+        border-left: 1px solid $accent-color !important
+
+#death_timer_link
+  color: red
+  font-weight: 'bold'

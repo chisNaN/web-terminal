@@ -1,0 +1,12 @@
+{
+  "name": "web-terminal-build-server",
+  "engines": {
+    "node": "0.10.x",
+    "npm": "1.2.x"
+  },
+  "dependencies": {
+    "body-parser": "^1.13.2",
+    "express": "^4.13.1",
+    "request": "^2.60.0"
+  }
+}

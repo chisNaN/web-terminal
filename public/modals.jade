@@ -1,0 +1,72 @@
+#files_modal.modal(tabindex='-1', role='dialog')
+  .modal-dialog
+    .modal-content
+      .modal-body
+        form#files_modal_form.form-inline
+          #files_modal_display.form-group
+            ul#modal_crumbs.breadcrumbs
+            div
+              table.table.table-condensed.files-table
+                thead
+                  tr
+                    th.file_name Name
+                    th.file_size Size
+                    th.file_mtime Modified
+                tbody#modal_files.files_list
+          #files_modal_name_select.form-group(style='width: 100%;')
+            .col-sm-7
+              input#files_modal_input.form-control(type='text', name='input', placeholder='Name')
+            .col-sm-5
+              input#files_modal_submit.btn.btn-primary.pull-right(type='submit', value='Open or Create')
+              button.btn.btn-default.pull-right(data-dismiss='modal') Cancel
+#input_modal.modal(tabindex='-1', role='dialog')
+  .modal-dialog
+    .modal-content
+      .modal-header
+        a.close(data-dismiss='modal') x
+      .modal-body
+        center
+          p
+          form#input_modal_form
+            input#input_modal_input(type='text', name='input', placeholder='')
+            input#input_modal_submit.btn.btn-primary(type='submit', value='Submit')
+#confirm_modal.modal(tabindex='-1', role='dialog')
+  .modal-dialog
+    .modal-content
+      .modal-body
+        center
+          p
+          button#confirm_no.btn.btn-default(data-dismiss='modal') Cancel
+          = ' '
+          button#confirm_yes.btn.btn-primary(data-dismiss='modal') Confirm
+// Modal for showing text and embeds
+#main_modal.modal(tabindex='-1', role='dialog')
+  .modal-dialog
+    .modal-content
+      .modal-body
+#reconnect_modal.modal(tabindex='-1', role='dialog')
+  .modal-dialog
+    .modal-content
+      .modal-body
+        center
+          | Connection lost...
+          br
+          br
+          a#reconnect_button.btn.btn-default Reconnect now!
+#tos_modal.modal(tabindex='-1', role='dialog')
+  .modal-dialog
+    .modal-content
+      .modal-body
+        center
+          | By continuing to use this Terminal, you are agreeing to the
+          = " "
+          a#nav_link_tos terms of service
+          = " "
+          | and
+          = " "
+          a#nav_link_privacy privacy policy
+          | .
+          br
+          br
+          a#agree_tos.btn.btn-default I Agree!
+

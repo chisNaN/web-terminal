@@ -1,0 +1,88 @@
+// Base styles
+
+$sans-fonts: proxima nova, helvetica, arial, freesans, clean, sans-serif !important
+$monospace-fonts: monaco, menlo, 'ubuntu mono', consolas, source-code-pro, monospace
+$panel-margin: 0
+
+// Base colors
+
+$blue: #268bd2
+$red: #dc322f
+$green: #859900
+$orange: #cb4b16
+$yellow: #b58900
+$magenta: #d33682
+$violet: #6c71c4
+$cyan: #2aa198
+
+$text-light: black
+$text-inverse-light: white
+$text-dark: #eee
+$text-inverse-dark: #222
+
+$accent-color: $cyan 
+$accent-color-light: #bde3f7
+$accent-color-dark: #014b72
+
+//Solarized colors
+$base03: #002b36
+$base02: #073642
+$base01: #586e75
+$base00: #657b83
+
+$base0: #839496
+$base1: #93a1a1
+$base2: #eee8d5
+$base3: #fdf6e3
+
+// Grays
+
+$border-gray: #a0a0a0
+
+// Primary backgrounds and borders
+// For use in panels
+
+$background-light: #fbfbfa
+$background-active-light: #eee
+$border-light: #e5e5e5
+$border-strong-light: #ccc
+
+$background-dark: $base03
+$background-active-dark: #222
+$border-dark: #444
+$border-strong-dark: #555
+
+// Secondary backgrounds and borders
+// For use in dropdowns, modals, menus, popovers
+
+$menu-background-light: #fff
+$menu-border-light: #ddd
+$menu-text-light: #444
+$menu-text-inactive-light: #eee
+
+$menu-background-dark: #444
+$menu-border-dark: rgba(0, 0, 0, 0.15)
+$menu-text-dark: $base0 
+$menu-text-inactive-dark: #666
+
+// Clearfix
+//
+// For modern browsers
+// 1. The space content is one way to avoid an Opera bug when the
+//    contenteditable attribute is included anywhere else in the document.
+//    Otherwise it causes space to appear at the top and bottom of elements
+//    that are clearfixed.
+// 2. The use of `table` rather than `block` is only necessary if using
+//    `:before` to contain the top-margins of child elements.
+//
+// Source: http://nicolasgallagher.com/micro-clearfix-hack/
+
+@mixin clearfix()
+  &:before,
+  &:after
+    content: " "
+    display: table
+  &:after
+    clear: both
+
+

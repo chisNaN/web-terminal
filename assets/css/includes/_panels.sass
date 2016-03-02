@@ -1,0 +1,216 @@
+// PANELS
+
+.manager_pane
+  display: none
+
+.panel
+  padding: 0px
+  position: absolute
+  width: auto
+  height: auto
+  margin: $panel-margin
+  border-radius: 0
+  overflow: hidden
+  .theme_light &
+    background-color: white
+    border: 1px solid #c8c8c8
+  .theme_dark &
+    background-color: $base03 
+    border: 1px solid $base00
+  &.active
+    border-color: $accent-color
+
+  $empty_panel_width: 200px
+  $empty_panel_height: 130px
+  > .empty_panel
+    position: absolute
+    top: 50%
+    left: 50%
+    height: $empty_panel_height
+    width: $empty_panel_width
+    margin: (-$empty_panel_height/2) (-$empty_panel_width/2)
+    text-align: center
+    .empty_icon
+      display: inline-block
+      margin-bottom: 16px
+      .fa
+        font-size: 60px
+    .empty_message
+      margin-bottom: 22px
+      font-size: 18px
+    .btn-empty-panel
+      font-size: 14px
+
+    .theme_light &
+      &, .fa, .btn-empty-panel
+        color: #ccc
+      .btn-empty-panel
+        color: #bbb
+        background: #fafafa
+        border-color: #eee
+        &:hover, &:focus
+          color: #888
+          border-color: #ececec
+
+    .theme_dark &
+      &, .fa, .btn-empty-panel
+        color: $base1 
+      .btn-empty-panel
+        border-color: $base1
+        &:hover, &:focus
+          color: $base03
+          background-color: $base1
+          border-color: $base1
+
+.panel_dock > a
+  cursor: pointer
+
+// PANEL TABS
+
+.tab_bar
+  left: 0
+  width: auto
+  padding: 1px 0
+  &, .info_pane
+    z-index: 101
+    top: 0
+    right: 0
+    height: 24px
+    margin: 0
+
+    .theme_light &
+      background-color: #eee
+    .theme_dark &
+      background-color: $base03
+      border-bottom: 1px solid $base02
+  .info_pane
+    line-height: 24px
+    position: absolute
+    .theme_light &
+      color: #aaa
+      border-left: 1px solid #ccc
+    .theme_dark &
+      color: #888
+      border-left: 1px solid #555
+
+.tab.term
+  width: 50px
+
+.closetab
+  float: right !important
+  margin-right: -6px !important
+  margin-left: 1px !important
+  margin-top: 1px !important
+  border-radius: 8px
+  width: 13px
+  height: 13px
+  line-height: 15px
+  font-size: 16px
+  font-weight: 600
+  text-align: center
+  .theme_light &:hover,
+  .theme_dark &:hover
+    background-color: #CC6460
+    color: #fff !important
+
+.tab
+  float: left
+  font-size: 14px
+  font-weight: 400
+  margin: 0
+  cursor: default
+  padding: 4px 10px
+  height: 23px
+  line-height: 17px
+  overflow: hidden
+  position: relative
+
+  &.active
+    display: block
+    margin-bottom: -4px
+  &.activeright
+    border-left: 0px
+  &.updated
+    color: red
+
+  .theme_light &
+    background-color: #EEE
+    &, &.newtab, .closetab
+      color: #aaa
+    &:hover
+      color: #777
+    &.active
+      background-color: #FFF
+      color: #000
+
+  .theme_dark &
+    background-color: $base03 
+    border-bottom: 1px solid $base02
+    &, &.newtab, .closeta2
+      color: #888
+    &:hover
+      background: $base01 
+      color: $base3
+    &.active
+      background-color: $base02
+      color: $base3
+      border-color: $accent-color
+      &:hover
+        background: $base02
+
+  &.newtab
+    width: 23px
+    font-weight: bold
+
+  .theme_light &.newtab:hover
+    color: #222
+    background: #fff
+  .theme_dark &.newtab:hover
+    color: $base3
+    background: $base01
+
+// PANEL CONTENT
+
+.content_div
+  position: absolute
+  width: auto
+  height: auto
+  left: 0
+  top: 25px
+  right: 0
+  bottom: 0
+  overflow: hidden
+  white-space: nowrap
+  margin: 0
+  border: 0
+  font-family: $monospace-fonts
+  font-size: 12px
+  font-style: normal
+  font-variant: normal
+  font-weight: normal
+  z-index: 1
+
+// PANEL RESIZE
+
+.resize
+  position: absolute
+  display: block
+  opacity: 0
+  z-index: 100
+  color-profile: sRGB
+  border: 1px solid red
+  background: red
+
+.resize_x
+  cursor: ew-resize
+  width: 8px
+  margin-left: -4px
+  height: auto
+  right: auto
+
+.resize_y
+  cursor: ns-resize
+  height: 8px
+  margin-top: -4px
+  width: auto
+  bottom: auto

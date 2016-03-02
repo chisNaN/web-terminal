@@ -1,0 +1,8 @@
+#!/bin/bash
+# todo make a .ffignore
+TFILE="/tmp/$(basename $0).$$.tmp"
+echo "press / to search; press o to open selected file; press q quit" > $TFILE
+echo "==========================================================================" >> $TFILE
+#find "$@" -type f -not -path *.git* -not -path *node_modules* >> $TFILE
+find "$@" -type f -not -path "*.git*" -not -path "*node_modules*" -exec sh -c "file {} | grep text >/dev/null" \; -print >> $TFILE
+vim -u /opt/web-terminal/scripts/ff.vimrc $TFILE

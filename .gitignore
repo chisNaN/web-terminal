@@ -1,0 +1,37 @@
+# npm
+node_modules
+build-server/node_modules
+*.npmignore
+*npm-debug.log
+
+# tmp files
+LOAD_BALANCER_IP
+*.travis.yml
+octave/
+octave
+info.json
+nohup.out
+local/chat.db
+local/history.i.txt
+local/history.o.txt
+
+# compiled files
+public/index.html
+public/assets/*
+sbin
+assets/js/bundle.js
+dev_nginx.conf
+assets/css/application.compiled.css
+assets/maps
+
+# dev files
+*.swp
+*.swo
+
+# socket files
+dev.sock
+web-terminal-prod.sock
+
+# pxy logs
+pxy/logs/error.log
+pxy/nginx/logs/access.log

@@ -1,0 +1,263 @@
+$uploader_height: 80px
+
+=files_breadcrumbs()
+  list-style: none
+  font-size: 13px
+  padding: 6px 12px 4px
+  margin: 0px
+  .theme_light &
+    color: $text-light
+  .theme_dark &
+    a
+      color: $cyan
+  > li
+    color: $base1
+    display: inline-block
+    a
+      text-decoration: none
+    .divider
+      padding: 0 3px
+      color: #999999
+
+=files_list()
+  cursor: default
+  th
+    font-weight: 400
+    .theme_light &
+      border-bottom: 1px solid $border-light !important
+    .theme_dark &
+      border-bottom: 1px solid $border-dark !important
+  td, th
+    border: 0 !important
+    white-space: nowrap
+    &.file_name
+      padding-left: 12px
+      a
+        .theme_light &
+          color: $text-light
+        .theme_dark &
+          color: $base0
+        &:hover, &:focus
+          text-decoration: none
+        .fa
+          margin-right: 7px
+          &.fa-file, &.fa-file-o
+            margin-left: 1px
+            margin-right: 8px
+    &.file_size
+      width: 20%
+    &.file_mtime
+      width: 20%
+  tr.active, tr.select_item_menu_row, tr.context-menu-active
+    td, th
+      .theme_light &
+        background-color: $accent-color-light
+      .theme_dark &
+        background-color: $accent-color-dark
+  tr
+    td.active, th.active
+      .theme_light &
+        background-color: $accent-color-light
+      .theme_dark &
+        background-color: $accent-color-dark
+  tr.navigate_up
+    td
+      a
+        margin-left: 9px
+        .theme_light &
+          color: $text-light
+        .theme_dark &
+          color: $text-dark
+  .fa.fa-file-o
+    font-size: 85%
+
+=files_navbar()
+  .nav > li > a
+    display: inline-block
+  .select_item_menu
+    cursor: default
+    a
+      cursor: pointer
+  .select_item_box
+    margin-bottom: 0
+
+=add_icon()
+  content: "+"
+  position: absolute
+  height: 9px
+  width: 9px
+  bottom: -3px
+  right: -5px
+  text-align: center
+  line-height: 6px
+  font-size: 10px
+  border-radius: 50%
+
+=files_icons()
+  #create_file .fa.fa-file,
+  #create_folder .fa.fa-folder-open
+    position: relative
+    margin-left: 2px
+    margin-right: 5px
+    line-height: 14px
+    .theme_light &:after
+      +add_icon()
+      background: $text-inverse-dark
+      color: $text-inverse-light
+      border: 1px solid $text-inverse-light
+    .theme_dark &:after
+      +add_icon()
+      background: $text-inverse-light
+      color: $text-inverse-dark
+      border: 1px solid $text-inverse-dark
+
+#files_modal
+  *:not(input.field)
+    -moz-user-select: -moz-none
+    -khtml-user-select: none
+    -webkit-touch-callout: none
+    -webkit-user-select: none
+    -ms-user-select: none
+    user-select: none
+  .modal-content
+    overflow: hidden
+  .modal-body
+    padding: 0
+    padding-bottom: 20px
+
+  td.file_dropdown
+    pointer-events: none
+    visibility: hidden
+
+  #files_modal_display
+    margin-bottom: 20px
+    width: 100%
+    > div
+      overflow-y: scroll
+      height: 320px
+      .theme_light &
+        border-bottom: 1px solid $border-light
+      .theme_dark &
+        border-bottom: 1px solid $border-dark
+
+    .nav
+      margin-bottom: 0px
+    .breadcrumbs
+      +files_breadcrumbs()
+      padding: 8px 14px
+      .theme_light &
+        border-bottom: 1px solid $border-light
+      .theme_dark &
+        border-bottom: 1px solid $border-dark
+    +files_list()
+
+  #files_modal_input
+    // width: 100%
+  #files_modal_submit
+    height: auto
+    margin-left: 10px
+
+#files_container
+  position: absolute
+  width: auto
+  height: auto
+  overflow: hidden
+  top: 0%
+  right: 90%
+  bottom: 0%
+  left: 0%
+  font-size: 14px
+
+  .breadcrumbs
+    +files_breadcrumbs()
+
+  .button-navbar
+    +files_navbar()
+    +files_icons()
+
+  .files-table-wrapper
+    position: absolute
+    top: 53px
+    bottom: $uploader_height
+    left: 0
+    right: 0
+    overflow: auto
+
+  +files_list()
+  tbody.files_list
+    width: 100%
+    bottom: 0
+    left: 0
+    right: 0
+    margin: 0
+    padding: 0
+
+#uploader
+  position: absolute
+  bottom: 0
+  min-height: $uploader_height
+  left: 0
+  right: 0
+  .theme_light &
+    border-top: 1px solid $border-light
+    background: $background-light
+  .theme_dark &
+    border-top: 1px solid $border-dark
+    background: $base02
+
+  #upload_alerts
+    margin-bottom: 10px
+    .alert
+      position: relative
+      font-size: 90%
+      padding: 8px 10px 6px
+      margin: 10px 10px 0
+      &.alert-dismissable .close
+        position: absolute
+        top: 5px
+        right: 5px
+      strong
+        // prevent overflow
+        display: inline-block
+        margin-bottom: -3px
+        max-width: 100%
+        white-space: nowrap
+        text-overflow: ellipsis
+        overflow: hidden
+
+  #drag_and_drop
+    .file-input-name
+      display: none
+    .theme_light &
+      color: $menu-text-light
+    .theme_dark &
+      color: $menu-text-dark
+
+  #upload_list
+    position: relative
+    > *
+      padding: 10px
+      .theme_light &
+        border-top: 1px solid $border-light
+      .theme_dark &
+        border-top: 1px solid $border-dark
+    .actions
+      display: inline-block
+      text-overflow: ellipsis
+      overflow: hidden
+      max-width: 100%
+      &, a
+        .theme_light &
+          color: $menu-text-light
+        .theme_dark &
+          color: $menu-text-dark
+      .filename
+        .theme_light &
+          color: $text-light
+        .theme_dark &
+          color: $text-dark
+      a
+        font-size: 85%
+    .progress
+      height: 10px
+      margin: 5px 0

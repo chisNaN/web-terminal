@@ -1,0 +1,196 @@
+.navbar-default
+  -webkit-box-shadow: none !important
+  box-shadow: none !important
+
+.navbar-static-top
+  margin-bottom: 0
+
+.navbar
+  margin-bottom: 0
+
+.nav-logged-out
+  color: #00f
+  background: 0 !important
+  background-image: none !important
+  -webkit-box-shadow: none !important
+  box-shadow: none !important
+  background: none !important
+  padding-top: 10px
+  padding-bottom: 10px
+
+.nav-logged-in
+  margin-bottom: 0 !important
+  margin-top: 0 !important
+  padding-bottom: 0 !important
+  min-height: 10px !important
+  font-size: 13px !important
+  font-style: normal !important
+  font-variant: normal !important
+  font-weight: bold !important
+
+.nav-logged-in a
+  padding: 10px 0 10px 15px !important
+  color: #364655 !important
+
+.nav-logged-out .link
+  padding: 10px 0 10px 10px !important
+
+.nav-logged-out .btn
+  margin-top: 5px
+  margin-bottom: 5px
+  padding: 5px 10px 5px 10px !important
+  margin-left: 10px
+
+.navbar-nav > li > .dropdown-menu
+  border-top-right-radius: 4px
+  border-top-left-radius: 4px
+
+.navbar-nav > li > .dropdown-menu.dropdown-popover
+  margin: 0
+  padding: 0
+  min-height: 80px
+  overflow-y: scroll
+
+.dropdown-loading-icon
+  position: absolute
+  top: 50%
+  left: 50%
+  font-size: 20px
+  margin: -10px
+  color: #999
+  z-index: -1
+
+iframe.dropdown-iframe
+  display: block
+  border-radius: 4px
+  border: none
+  outline: none
+  box-shadow: none
+  -moz-box-shadow: none
+  -webkit-box-shadow: none
+
+.featurette
+  padding: 40px
+  margin-bottom: 0
+
+.featurette:nth-of-type(even)
+  background: #e7e7e7 !important
+
+.featurette:nth-of-type(odd)
+  background: white !important
+
+hr.before_footer
+  margin: 40px 0
+
+.index-page #sign-up
+  display: none
+
+.nav-logged-out .btn-success
+  color: white !important
+
+.navbar-form
+  margin-top: 5px
+  margin-bottom: 5px
+
+.nav span.glyphicon
+  padding-bottom: 15px
+  margin-bottom: -15px
+
+#brand
+  color: #000
+  padding-top: 5px !important
+  padding-bottom: 5px !important
+  padding-right: 15px !important
+  border-right: 1px solid #e7e7e7
+
+.index_page .jumbotron
+  background: #000
+  color: #fff
+  background: -webkit-linear-gradient(right, gray, black)
+  background: -moz-linear-gradient(right, gray, black)
+  background: -o-linear-gradient(right, gray, black)
+  background: -ms-linear-gradient(right, gray, black)
+  background: linear-gradient(to left, gray, black)
+
+.footer
+  text-align: center
+  padding: 30px 0
+  margin-top: 70px
+  border-top: 1px solid #e5e5e5
+  background-color: whitesmoke
+
+.footer p
+  margin-bottom: 0
+  color: #777777
+
+.footer-links
+  margin: 10px 0
+
+.footer-links li
+  display: inline
+  padding: 0 2px
+
+.footer-links li:first-child
+  padding-left: 0
+
+//.img-rounded
+//   width: 400px !important
+//   height: 200px !important
+
+.thumbnail
+  padding: 10px
+
+.no_login_buttons .navbar-form
+  display: none
+
+.no_login_buttons #features
+  padding-right: 0px
+
+.button-navbar
+  font-size: 13px
+  width: 100%
+  margin-top: 0
+  +clearfix()
+  i
+    vertical-align: text-bottom
+  > ul
+    text-align: center
+    > li
+      display: inline-block
+      line-height: 25px
+      &.disabled
+        pointer-events: none
+        &, .fa
+          color: rgba(160,160,160,0.75)
+      &.with-separator
+        .theme_light &
+          border-right: 1px solid #eee
+        .theme_dark &
+          border-right: 1px solid #222
+      > a
+        padding: 5px 8px
+        background: none !important
+      span
+        position: relative
+        top: 1px
+
+  .theme_light &
+    background-color: #FBFBFA
+    border-bottom: 1px solid #f0f0f0
+    &, a, li
+      color: black
+    li:hover
+      background-color: #eee
+    li.active
+      background-color: #e8e8e8
+  .theme_dark &
+    background-color: $base02 
+    &, a, li
+      color: $base1
+    li:hover
+      background-color: $base01
+      a
+        color: $base3
+    li.active
+      background-color: #333333
+

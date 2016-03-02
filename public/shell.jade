@@ -1,0 +1,22 @@
+#shell_container.manager_pane
+  #tablist.tab_bar.unselectable
+    .info_pane
+      span.compatibility-mode
+        a
+          span.lock-button
+            i.unlock.fa.fa-fw.fa-unlock-alt
+            i.lock.fa.fa-fw.fa-lock
+        span.users-indicator
+          i.one.fa.fa-fw.fa-user
+          i.many.fa.fa-fw.fa-users
+      span.dimensions
+  #resizable.content_div
+    .loading
+      i.fa.fa-5x.fa-spin.fa-cog
+  #shell_empty.empty_panel
+    .empty_icon
+      i.fa.fa-terminal
+    .empty_message
+      | No open terminals
+    a.empty_newtab.btn.btn-empty-panel(href='#')
+      | New Terminal

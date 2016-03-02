@@ -1,0 +1,25 @@
+#html_container.manager_pane
+  #htmltablist.tab_bar.unselectable
+  #html_bar.unselectable(style='display: none;')
+    #html_refresh.html_button(style='margin-left: 0px;')
+      i.fa.fa-refresh
+    #html_popout.html_popout.html_button(style='margin-left: 29px;')
+      i.fa.fa-external-link
+    #html_form_container
+      form#html_form
+        input#html_url_input(type='text', name='url', placeholder='localhost:80')
+  #html_content_div.content_div(style='display: none;')
+    #html_x-origin.x-origin
+      .error_icon
+        i.fa.fa-exclamation-circle
+      .error_message
+        | This page may only be shown in its own tab
+      a.html_popout.btn(href='#')
+        | View in a new tab
+  #html_empty.empty_panel
+    .empty_icon
+      i.fa.fa-globe
+    .empty_message
+      | No open tabs
+    a.empty_newtab.btn.btn-empty-panel(href='#')
+      | New Tab

@@ -1,0 +1,28 @@
+#files_container.manager_pane.unselectable
+  ul#myCrumbs.breadcrumbs
+  .navbar.unselectable
+    .button-navbar
+      ul#files_toolbar.nav.navbar-nav.unselectable
+        li#create_file.with-separator
+          a(role='button')
+            i.fa.fa-fw.fa-file
+            |  New File
+        li#create_folder.with-separator
+          a(role='button')
+            i.fa.fa-fw.fa-folder-open
+            |  New Folder
+      ul#active_file_toolbar.nav.navbar-nav.unselectable
+  ul#search_files.nav.navbar-nav.nav-tabs.nav-stacked.files_list
+  .files-table-wrapper
+    table.table.table-condensed.files-table
+      tbody#myFiles.files_list
+  div#uploader
+    #drag_and_drop
+      #upload_alerts
+      center
+        p
+          input#upload_files.btn.btn-default(type='file', name='files[]', multiple='', title='Upload Files')
+          = ' '
+          input#upload_folder.btn.btn-default(type='file', name='folder[]', multiple='', directory='', webkitdirectory='', mozdirectory='', title='Upload Folder')
+        p or drag and drop files here
+      #upload_list
